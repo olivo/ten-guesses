@@ -17,11 +17,23 @@ public class MainActivity extends AppCompatActivity {
     public void checkGuess(View view) {
 
         String guess = ((EditText)findViewById(R.id.editText)).getText().toString();
-        int guessNumber = Integer.parseInt(guess);
+        int guessNumber = -1;
+
+        try {
+
+            guessNumber = Integer.parseInt(guess);
+        }
+        catch(NumberFormatException e) {
+
+            Toast.makeText(getApplicationContext(), "Please enter a valid number.",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
 
         if (secretNumber == guessNumber) {
 
             Toast.makeText(getApplicationContext(), "YOU WON!!!", Toast.LENGTH_LONG).show();
+            initializeData();
         }
         else {
 
